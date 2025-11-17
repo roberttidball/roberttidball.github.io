@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robert Tidball - Quantitative Developer</title>
     
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ffffff'/><text x='50' y='65' font-family='Inter, sans-serif' font-size='45' fill='%230F172A' text-anchor='middle' font-weight='bold'>RT</text></svg>">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -364,23 +366,50 @@
             border: 1px solid #334155;
             text-decoration: none;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* New: Flexbox for logo alignment */
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
         }
 
         .blog-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 8px 25px rgba(56, 189, 248, 0.15);
         }
+        
+        .blog-card-logo {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            border-radius: 4px;
+            background: #fff; /* White background for logos */
+        }
+        
+        .blog-card-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .blog-card-content {
+            flex-grow: 1;
+        }
 
-        .blog-card h3 {
+        .blog-card-content h3 { /* Scoped h3 for new layout */
             color: var(--text-primary);
-            margin-bottom: 1rem;
+            margin-bottom: 0.25rem;
             font-size: 1.25rem;
             font-weight: 600;
         }
 
-        .blog-card p {
+        .blog-card-content p { /* Scoped p for new layout */
             color: var(--accent);
             font-weight: 500;
+            margin-bottom: 0;
         }
 
         /* Skills Grid */
@@ -502,6 +531,14 @@
             .blog-grid {
                 grid-template-columns: 1fr;
             }
+            
+            /* Adjust logo cards for mobile */
+             .blog-card {
+                flex-direction: row;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
 
             .contact-info {
                 flex-direction: column;
@@ -618,18 +655,33 @@
             <div class="blog-grid">
                 
                 <a href="https://quantdevinsights.hashnode.dev/" target="_blank" class="blog-card">
-                    <h3>QuantDev Insights</h3>
-                    <p>Read Blog →</p>
+                    <div class="blog-card-logo">
+                        <img src="images/logo-hashnode.svg" alt="Hashnode Logo">
+                    </div>
+                    <div class="blog-card-content">
+                        <h3>QuantDev Insights</h3>
+                        <p>Read Blog →</p>
+                    </div>
                 </a>
                 
                 <a href="https://dev.to/roberttidball" target="_blank" class="blog-card">
-                    <h3>dev.to/roberttidball</h3>
-                    <p>Read Blog →</p>
+                    <div class="blog-card-logo">
+                        <img src="images/logo-devto.svg" alt="Dev.to Logo">
+                    </div>
+                    <div class="blog-card-content">
+                        <h3>dev.to/roberttidball</h3>
+                        <p>Read Blog →</p>
+                    </div>
                 </a>
                 
                 <a href="https://medium.com/@robert.tidball1" target="_blank" class="blog-card">
-                    <h3>medium.com/@robert.tidball1</h3>
-                    <p>Read Blog →</p>
+                    <div class="blog-card-logo">
+                        <img src="images/logo-medium.svg" alt="Medium Logo">
+                    </div>
+                    <div class="blog-card-content">
+                        <h3>medium.com/@robert.tidball1</h3>
+                        <p>Read Blog →</p>
+                    </div>
                 </a>
 
             </div>
