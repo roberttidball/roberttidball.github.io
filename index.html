@@ -366,10 +366,12 @@
             border: 1px solid #334155;
             text-decoration: none;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            /* New: Flexbox for logo alignment */
+            
+            /* Center logo for logo-only display */
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            justify-content: center;
+            min-height: 120px; /* Give the card a defined size */
         }
 
         .blog-card:hover {
@@ -379,13 +381,13 @@
         
         .blog-card-logo {
             flex-shrink: 0;
-            width: 36px;
-            height: 36px;
+            width: 80px; /* Larger size for the logo since it's the only element */
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 4px;
-            border-radius: 4px;
+            padding: 8px; 
+            border-radius: 8px;
             background: #fff; /* White background for logos */
         }
         
@@ -395,22 +397,11 @@
             object-fit: contain;
         }
         
+        /* Remove unused blog content styles since text is gone */
         .blog-card-content {
-            flex-grow: 1;
+            display: none; 
         }
 
-        .blog-card-content h3 { /* Scoped h3 for new layout */
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .blog-card-content p { /* Scoped p for new layout */
-            color: var(--accent);
-            font-weight: 500;
-            margin-bottom: 0;
-        }
 
         /* Skills Grid */
         .skills-grid {
@@ -532,11 +523,9 @@
                 grid-template-columns: 1fr;
             }
             
-            /* Adjust logo cards for mobile */
+            /* Blog cards mobile layout - still centered */
              .blog-card {
-                flex-direction: row;
-                align-items: center;
-                gap: 1.5rem;
+                padding: 1.5rem;
             }
 
 
@@ -601,7 +590,7 @@
                 
                 <div class="project-card">
                     <div class="project-logo-container">
-                        <img src="logo-fxmacrodata.png" alt="FXMacroData Logo" class="project-logo">
+                        <img src="images/logo-fxmacrodata.png" alt="FXMacroData Logo" class="project-logo">
                     </div>
                     <div class="project-content">
                         <h3>FXMacroData - Macroeconomic APIs</h3>
@@ -641,7 +630,7 @@
                         </div>
                     </div>
                     <div class="project-logo-container">
-                         <img src="logo-suburbstory.png" alt="SuburbStory Logo" class="project-logo favicon-logo">
+                         <img src="images/logo-suburbstory.png" alt="SuburbStory Logo" class="project-logo favicon-logo">
                     </div>
                 </div>
 
@@ -654,35 +643,23 @@
             <h2 class="section-title">Latest Insights</h2>
             <div class="blog-grid">
                 
-                <a href="https://quantdevinsights.hashnode.dev/" target="_blank" class="blog-card">
+                <a href="https://quantdevinsights.hashnode.dev/" target="_blank" class="blog-card" aria-label="Go to QuantDev Insights blog on Hashnode">
                     <div class="blog-card-logo">
                         <img src="images/logo-hashnode.svg" alt="Hashnode Logo">
                     </div>
-                    <div class="blog-card-content">
-                        <h3>QuantDev Insights</h3>
-                        <p>Read Blog →</p>
-                    </div>
-                </a>
+                    </a>
                 
-                <a href="https://dev.to/roberttidball" target="_blank" class="blog-card">
+                <a href="https://dev.to/roberttidball" target="_blank" class="blog-card" aria-label="Go to robert tidball's blog on Dev.to">
                     <div class="blog-card-logo">
                         <img src="images/logo-devto.svg" alt="Dev.to Logo">
                     </div>
-                    <div class="blog-card-content">
-                        <h3>dev.to/roberttidball</h3>
-                        <p>Read Blog →</p>
-                    </div>
-                </a>
+                    </a>
                 
-                <a href="https://medium.com/@robert.tidball1" target="_blank" class="blog-card">
+                <a href="https://medium.com/@robert.tidball1" target="_blank" class="blog-card" aria-label="Go to robert tidball's blog on Medium">
                     <div class="blog-card-logo">
                         <img src="images/logo-medium.svg" alt="Medium Logo">
                     </div>
-                    <div class="blog-card-content">
-                        <h3>medium.com/@robert.tidball1</h3>
-                        <p>Read Blog →</p>
-                    </div>
-                </a>
+                    </a>
 
             </div>
         </div>
