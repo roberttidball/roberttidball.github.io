@@ -3,19 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robert Tidball</title>
+    <title>Robert Tidball - Quantitative Developer</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* CSS Variables for easy theme management */
+        :root {
+            --bg-dark: #0F172A;      /* Dark Slate Blue */
+            --bg-card: #1E293B;      /* Lighter Slate */
+            --text-primary: #F1F5F9;  /* Near White */
+            --text-secondary: #94A3B8; /* Light Gray */
+            --accent: #38BDF8;      /* Bright Sky Blue */
+            --accent-dark: #0E7490;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #263238;
-            background: #fafafa;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            background: var(--bg-dark);
             min-height: 100vh;
         }
 
@@ -25,39 +44,59 @@
             padding: 0 2rem;
         }
 
-        /* Header */
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--accent);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Header & Navigation */
         header {
-            background: #ffffff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Scrolled state for header */
+        header.scrolled {
+            background: rgba(15, 23, 42, 0.85); /* --bg-dark with opacity */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 1.5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
             font-size: 1.5rem;
-            font-weight: 500;
-            color: #00695c;
+            font-weight: 600;
+            color: var(--text-primary);
             text-decoration: none;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 2.5rem;
         }
 
         .nav-links a {
-            color: #455a64;
+            color: var(--text-secondary);
             text-decoration: none;
             transition: color 0.3s ease;
             position: relative;
@@ -65,7 +104,7 @@
         }
 
         .nav-links a:hover {
-            color: #00695c;
+            color: var(--text-primary);
         }
 
         .nav-links a::after {
@@ -75,7 +114,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #00695c;
+            background: var(--accent);
             transition: width 0.3s ease;
         }
 
@@ -88,57 +127,70 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            color: #263238;
+            color: var(--text-primary);
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, #e0f2f1 0%, #b2dfdb 100%);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%2300695c" stop-opacity="0.1"/><stop offset="100%" stop-color="%2300695c" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>') no-repeat center;
-            background-size: cover;
-            opacity: 0.6;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
+            max-width: 700px;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
-            color: #263238;
-            font-weight: 300;
+            font-weight: 700;
+            line-height: 1.2;
             animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
         }
 
         .hero .subtitle {
             font-size: 1.5rem;
-            color: #455a64;
-            margin-bottom: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
             font-weight: 400;
             animation: fadeInUp 1s ease-out 0.2s both;
         }
 
         .hero .description {
             font-size: 1.1rem;
-            color: #546e7a;
+            color: var(--text-secondary);
             max-width: 600px;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .hero-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .hero-links a:hover {
+            color: var(--accent);
+        }
+
+        .hero-links svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
         }
 
         @keyframes fadeInUp {
@@ -152,85 +204,18 @@
             }
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border: 2px solid #00695c;
-            background: transparent;
-            color: #00695c;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: #00695c;
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        .btn:hover::before {
-            left: 0;
-        }
-
-        .btn:hover {
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 105, 92, 0.3);
-        }
-
-        .btn.primary {
-            background: #00695c;
-            color: white;
-        }
-
-        .btn.primary::before {
-            background: transparent;
-        }
-
-        .btn.primary:hover {
-            background: #004d40;
-            color: white;
-        }
-
-        /* Sections */
+        /* General Section Styling */
         section {
             padding: 100px 0;
-            background: white;
-        }
-
-        .section-dark {
-            background: #263238;
-            color: white;
         }
 
         .section-title {
             font-size: 2.5rem;
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             position: relative;
-            font-weight: 300;
-            color: #263238;
-        }
-
-        .section-dark .section-title {
-            color: white;
+            font-weight: 600;
+            color: var(--text-primary);
         }
 
         .section-title::after {
@@ -241,48 +226,99 @@
             transform: translateX(-50%);
             width: 80px;
             height: 3px;
-            background: #00695c;
+            background: var(--accent);
+            border-radius: 2px;
         }
 
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        /* Projects Section */
+        #projects {
+            background: #0B1120; /* Slightly different dark for contrast */
+        }
+        
+        .projects-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
         }
 
         .project-card {
-            background: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
+            display: grid;
+            grid-template-columns: 1fr; /* Default for mobile */
+            gap: 2rem;
+            background: var(--bg-card);
+            border-radius: 12px;
             overflow: hidden;
-            border-top: 4px solid #00695c;
+            border: 1px solid #334155;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .project-card::before {
-            display: none;
-        }
-
+        
         .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(0, 105, 92, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* Grid layout for larger screens */
+        @media (min-width: 768px) {
+            .project-card {
+                 grid-template-columns: 250px 1fr; /* Logo size fixed */
+            }
+            /* Reverse order for second card */
+            .project-card:nth-child(even) {
+                grid-template-columns: 1fr 250px;
+            }
+            .project-card:nth-child(even) .project-logo-container {
+                order: 2;
+            }
+            .project-card:nth-child(even) .project-content {
+                order: 1;
+            }
         }
 
-        .project-card h3 {
-            color: #263238;
+        .project-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #293548; /* Slightly lighter bg for logo */
+            padding: 2rem;
+            min-height: 200px;
+        }
+
+        .project-logo {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+        
+        /* Special style for the favicon-based logo */
+        .project-logo.favicon-logo {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            width: 120px;
+            height: 120px;
+        }
+        
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            color: var(--text-primary);
             margin-bottom: 1rem;
-            font-size: 1.4rem;
-            font-weight: 500;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
-        .project-card p {
-            color: #546e7a;
+        .project-content p {
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
-            line-height: 1.6;
+            line-height: 1.7;
+        }
+        
+        .project-content p strong {
+            color: var(--text-primary);
+            font-weight: 500;
         }
 
         .tech-stack {
@@ -293,29 +329,58 @@
         }
 
         .tech-tag {
-            background: #e0f2f1;
-            color: #00695c;
+            background: #334155;
+            color: var(--accent);
             padding: 0.3rem 0.8rem;
             border-radius: 16px;
             font-size: 0.8rem;
-            border: 1px solid #b2dfdb;
             font-weight: 500;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
         }
 
         .project-links a {
-            color: #00695c;
+            color: var(--accent);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: color 0.3s ease;
+            font-size: 1rem;
         }
 
         .project-links a:hover {
-            color: #004d40;
+            color: #7dd3fc; /* Lighter accent */
+        }
+        
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.15);
+        }
+
+        .blog-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .blog-card p {
+            color: var(--accent);
+            font-weight: 500;
         }
 
         /* Skills Grid */
@@ -327,10 +392,10 @@
         }
 
         .skill-category {
-            background: white;
+            background: var(--bg-card);
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            border: 1px solid #334155;
             transition: transform 0.3s ease;
         }
 
@@ -339,30 +404,41 @@
         }
 
         .skill-category h3 {
-            color: #263238;
-            margin-bottom: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
             font-size: 1.3rem;
-            font-weight: 500;
+            font-weight: 600;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 0.5rem;
         }
 
         .skill-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
 
         .skill-item {
-            background: #f5f5f5;
-            padding: 0.4rem 0.8rem;
-            border-radius: 16px;
+            background: #334155;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
             font-size: 0.9rem;
-            color: #455a64;
-            border: 1px solid #e0e0e0;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
         /* Contact Section */
-        .contact {
+        #contact {
+            background: #0B1120;
             text-align: center;
+        }
+
+        .contact p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .contact-info {
@@ -374,28 +450,45 @@
         }
 
         .contact-item {
-            color: #b0bec5;
+            color: var(--text-secondary);
             text-decoration: none;
             transition: color 0.3s ease;
             font-size: 1.1rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .contact-item svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            transition: fill 0.3s ease;
         }
 
         .contact-item:hover {
-            color: #4db6ac;
+            color: var(--accent);
         }
+        
+        .contact-item:hover svg {
+            fill: var(--accent);
+        }
+
 
         /* Footer */
         footer {
-            background: #37474f;
-            color: #b0bec5;
+            background: #0F172A;
+            color: var(--text-secondary);
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
+            border-top: 1px solid #1E293B;
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                display: none; /* Simplification for this example. Add hamburger menu JS if needed. */
             }
 
             .hero h1 {
@@ -406,36 +499,14 @@
                 font-size: 1.2rem;
             }
 
-            .projects-grid {
+            .blog-grid {
                 grid-template-columns: 1fr;
             }
 
             .contact-info {
                 flex-direction: column;
-                gap: 1rem;
+                gap: 1.5rem;
             }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        /* Smooth Scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Scroll Progress Indicator */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 3px;
-            background: #00695c;
-            z-index: 9999;
-            transition: width 0.1s ease;
         }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C0HVTPMG55"></script>
@@ -443,19 +514,19 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-C0HVTPMG55');
     </script>
 </head>
 <body>
     <div class="scroll-progress"></div>
     
-    <header>
+    <header id="header">
         <nav>
-            <a href="#home" class="logo">RT</a>
+            <a href="#home" class="logo">Robert Tidball</a>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -466,58 +537,100 @@
         <div class="container">
             <div class="hero-content">
                 <h1>Robert Tidball</h1>
-                <p class="subtitle">Quantitative Developer & Data Engineering Leader</p>
+                <p class="subtitle">Quantitative Developer & <span>Data Engineering Leader</span></p>
                 <p class="description">
                     MSc Data Science & Financial Technology graduate with expertise in building scalable data platforms, 
                     automated trading systems, and AI-driven solutions. Experienced in Python, C++, cloud platforms, 
                     and quantitative model development across financial markets.
                 </p>
+                <div class="hero-links">
+                    <a href="https://linkedin.com/in/robert-tidball" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/roberttidball" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.109-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="section-dark">
+    <section id="projects">
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
+            <div class="projects-container">
+                
                 <div class="project-card">
-                    <h3>FXMacroData - Macroeconomic APIs</h3>
-                    <p>
-                        Engineered a specialized **Real-time Macroeconomic API** to democratize high-value FX data for retail traders. 
-                        It delivers instant updates on central bank interest rates, policy announcements, and key economic indicators 
-                        for all major currency pairs, directly sourced from official central bank releases. This fills a critical market gap 
-                        by providing institutional-grade, **low-latency data** at an accessible price point, crucial for effective forex trading strategies.
-                    </p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">RapidAPI</span>
-                        <span class="tech-tag">Google Cloud</span>
+                    <div class="project-logo-container">
+                        <img src="logo-fxmacrodata.png" alt="FXMacroData Logo" class="project-logo">
                     </div>
-                    <div class="project-links">
-                        <a href="https://fxmacrodata.com/?utm_source=personal-portfolio&utm_medium=website&utm_campaign=project-showcase" target="_blank">App →</a>
+                    <div class="project-content">
+                        <h3>FXMacroData - Macroeconomic APIs</h3>
+                        <p>
+                            Engineered a specialized <strong>Real-time Macroeconomic API</strong> to democratize high-value FX data for retail traders. 
+                            It delivers instant updates on central bank interest rates, policy announcements, and key economic indicators 
+                            for all major currency pairs, directly sourced from official central bank releases.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">RapidAPI</span>
+                            <span class="tech-tag">Google Cloud</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://fxmacrodata.com/?utm_source=personal-portfolio&utm_medium=website&utm_campaign=project-showcase" target="_blank">View Project →</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="project-card">
-                    <h3>SuburbStory - AI-Driven News Platform</h3>
-                    <p>
-                        Pioneered an innovative AI-powered platform delivering automated local news coverage to Australian suburbs. 
-                        Architected sophisticated AI pipelines leveraging Google Gemini LLMs to transform structured data into 
-                        natural language articles, addressing significant gaps in regional media coverage.
-                    </p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Flask</span>
-                        <span class="tech-tag">Google Cloud</span>
-                        <span class="tech-tag">Gemini LLM</span>
-                        <span class="tech-tag">Cloud Run</span>
-                        <span class="tech-tag">Firestore</span>
+                    <div class="project-content">
+                        <h3>SuburbStory - AI-Driven News Platform</h3>
+                        <p>
+                            Pioneered an innovative AI-powered platform delivering automated local news coverage to Australian suburbs. 
+                            Architected sophisticated AI pipelines leveraging <strong>Google Gemini LLMs</strong> to transform structured data into 
+                            natural language articles, addressing significant gaps in regional media coverage.
+                        </p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">Google Cloud</span>
+                            <span class="tech-tag">Gemini LLM</span>
+                            <span class="tech-tag">Cloud Run</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://suburbstory.com/?utm_source=personal-portfolio&utm_medium=website&utm_campaign=project-showcase" target="_blank">View Site →</a>
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="https://suburbstory.com/?utm_source=personal-portfolio&utm_medium=website&utm_campaign=project-showcase" target="_blank">Site →</a>
+                    <div class="project-logo-container">
+                         <img src="logo-suburbstory.png" alt="SuburbStory Logo" class="project-logo favicon-logo">
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </section>
+
+    <section id="blog">
+        <div class="container">
+            <h2 class="section-title">Latest Insights</h2>
+            <div class="blog-grid">
+                
+                <a href="https://quantdevinsights.hashnode.dev/" target="_blank" class="blog-card">
+                    <h3>QuantDev Insights</h3>
+                    <p>Read Blog →</p>
+                </a>
+                
+                <a href="https://dev.to/roberttidball" target="_blank" class="blog-card">
+                    <h3>dev.to/roberttidball</h3>
+                    <p>Read Blog →</p>
+                </a>
+                
+                <a href="https://medium.com/@robert.tidball1" target="_blank" class="blog-card">
+                    <h3>medium.com/@robert.tidball1</h3>
+                    <p>Read Blog →</p>
+                </a>
 
             </div>
         </div>
@@ -568,20 +681,22 @@
         </div>
     </section>
 
-    <section id="contact" class="section-dark">
+    <section id="contact">
         <div class="container">
             <div class="contact">
                 <h2 class="section-title">Let's Connect</h2>
-                <p style="color: #b0bec5; font-size: 1.1rem; margin-bottom: 2rem;">
+                <p>
                     Interested in discussing quantitative development opportunities or AI-driven solutions? 
                     Let's talk about how we can work together.
                 </p>
                 <div class="contact-info">
                     <a href="https://linkedin.com/in/robert-tidball" target="_blank" class="contact-item">
-                        💼 LinkedIn Profile
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        LinkedIn Profile
                     </a>
                     <a href="https://github.com/roberttidball" target="_blank" class="contact-item">
-                        🔗 GitHub
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.109-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub
                     </a>
                 </div>
             </div>
@@ -601,9 +716,13 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    // Calculate header height to offset scroll
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
@@ -614,19 +733,17 @@
             const scrollProgress = document.querySelector('.scroll-progress');
             const scrollPx = document.documentElement.scrollTop;
             const winHeightPx = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = `${scrollPx / winHeightPx * 100}%`;
+            const scrolled = `${(scrollPx / winHeightPx) * 100}%`;
             scrollProgress.style.width = scrolled;
         });
 
         // Header background on scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(255, 255, 255, 0.95)';
-                header.style.boxShadow = '0 2px 16px rgba(0,0,0,0.15)';
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
             } else {
-                header.style.background = '#ffffff';
-                header.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+                header.classList.remove('scrolled');
             }
         });
 
@@ -641,15 +758,16 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target); // Stop observing once animated
                 }
             });
         }, observerOptions);
 
-        // Observe all project cards and skill categories
-        document.querySelectorAll('.project-card, .skill-category').forEach(el => {
+        // Observe all cards
+        document.querySelectorAll('.project-card, .skill-category, .blog-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
             observer.observe(el);
         });
     </script>
