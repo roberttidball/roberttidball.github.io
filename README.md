@@ -24,7 +24,7 @@ No frameworks or libraries were used, ensuring the site is extremely lightweight
 ## ✨ Key Features
 
 * **Modern Dark-Mode Design:** A professional, tech-focused aesthetic.
-* **Featured Projects:** Prominent showcases for my main projects, [FXMacroData](https://fxmacrodata.com/) and [SuburbStory](https://suburbstory.com/).
+* **Featured Projects:** Prominent showcases for my main projects, [FXMacroData](https://fxmacrodata.com/?utm_source=github&utm_medium=referral&utm_campaign=personal-site&utm_content=readme) and [SuburbStory](https://suburbstory.com/).
 * **Latest Insights:** A dedicated section linking to my technical blogs on Hashnode, dev.to, and Medium.
 * **Responsive:** Fully responsive design that works seamlessly on desktop, tablet, and mobile.
 * **Dynamic Elements:** Subtle fade-in animations on scroll and a "glassmorphism" sticky header.
